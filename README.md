@@ -65,9 +65,9 @@ pip install bs-roformer-infer
   ```bash
   brew install ffmpeg
   ```
-- **Windows**: Download the binaries from the official site or install via Scoop/Choco:
+- **Windows**: Open **PowerShell as Administrator** and install FFmpeg using Winget:
   ```powershell
-  choco install ffmpeg
+  winget install Gyan.FFmpeg
   ```
 
 ---
