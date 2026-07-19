@@ -105,9 +105,42 @@ You can run the steps interactively using [remove-voice.ipynb](remove-voice.ipyn
      --store_dir "/kaggle/working/output"
    ```
 
-Outputs will be saved in the `output/` directory, containing:
-- `input_music_vocals.wav` (Isolated voice)
-- `input_music_instrumental.wav` (Instrumental backing track)
+Outputs will be saved in the `output/` directory.
+
+### Directory Structure & Execution Results
+
+After running the pipeline, your workspace folders will contain the following files:
+
+```
+REMOVE_VOICE/
+├── input/
+│   ├── input_music.mp3                 # Raw downloaded audio (~4.6 MB)
+│   └── input_music.wav                 # Preprocessed WAV audio (~36.6 MB)
+└── output/
+    ├── input_music_instrumental.wav    # Isolated backing track (~75.0 MB)
+    └── input_music_vocals.wav          # Isolated vocal stem (~75.0 MB)
+```
+
+- **`input_music.mp3`**: The raw downloaded audio file (original mix).
+
+  Play Original Mix:
+  <audio src="input/input_music.mp3" controls></audio>
+
+  *(Fallback: [Listen to Original Mix](input/input_music.mp3))*
+
+- **`input_music_vocals.wav`**: Contains the extracted vocal track (singer's voice).
+
+  Play Vocals:
+  <audio src="output/input_music_vocals.wav" controls></audio>
+
+  *(Fallback: [Listen to Vocals](output/input_music_vocals.wav))*
+
+- **`input_music_instrumental.wav`**: Contains the backing instrumental track (music only).
+
+  Play Instrumental:
+  <audio src="output/input_music_instrumental.wav" controls></audio>
+
+  *(Fallback: [Listen to Instrumental](output/input_music_instrumental.wav))*
 
 ## Project Structure
 
