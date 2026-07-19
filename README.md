@@ -124,23 +124,23 @@ REMOVE_VOICE/
 - **`input_music.mp3`**: The raw downloaded audio file (original mix).
 
   Play Original Mix:
-  <audio src="input/input_music.mp3" controls></audio>
+  <audio src="./input/input_music.mp3" controls></audio>
 
-  *(Fallback: [Listen to Original Mix](input/input_music.mp3))*
+  *(Fallback: [Listen to Original Mix](./input/input_music.mp3))*
 
 - **`input_music_vocals.wav`**: Contains the extracted vocal track (singer's voice).
 
   Play Vocals:
-  <audio src="output/input_music_vocals.wav" controls></audio>
+  <audio src="./output/input_music_vocals.wav" controls></audio>
 
-  *(Fallback: [Listen to Vocals](output/input_music_vocals.wav))*
+  *(Fallback: [Listen to Vocals](./output/input_music_vocals.wav))*
 
 - **`input_music_instrumental.wav`**: Contains the backing instrumental track (music only).
 
   Play Instrumental:
-  <audio src="output/input_music_instrumental.wav" controls></audio>
+  <audio src="./output/input_music_instrumental.wav" controls></audio>
 
-  *(Fallback: [Listen to Instrumental](output/input_music_instrumental.wav))*
+  *(Fallback: [Listen to Instrumental](./output/input_music_instrumental.wav))*
 
 ## Project Structure
 
