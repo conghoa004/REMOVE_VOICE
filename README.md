@@ -123,24 +123,15 @@ REMOVE_VOICE/
 
 - **`input_music.mp3`**: The raw downloaded audio file (original mix).
 
-  Play Original Mix:
-  <audio src="./input/input_music.mp3" controls></audio>
-
-  *(Fallback: [Listen to Original Mix](./input/input_music.mp3))*
+  [![Listen to Original Mix](https://img.shields.io/badge/Listen_to-Original_Mix-green?style=for-the-badge&logo=googleplaymusic)](./input/input_music.mp3)
 
 - **`input_music_vocals.wav`**: Contains the extracted vocal track (singer's voice).
 
-  Play Vocals:
-  <audio src="./output/input_music_vocals.wav" controls></audio>
-
-  *(Fallback: [Listen to Vocals](./output/input_music_vocals.wav))*
+  [![Listen to Vocals](https://img.shields.io/badge/Listen_to-Vocals-blue?style=for-the-badge&logo=soundcharts)](./output/input_music_vocals.wav)
 
 - **`input_music_instrumental.wav`**: Contains the backing instrumental track (music only).
 
-  Play Instrumental:
-  <audio src="./output/input_music_instrumental.wav" controls></audio>
-
-  *(Fallback: [Listen to Instrumental](./output/input_music_instrumental.wav))*
+  [![Listen to Instrumental](https://img.shields.io/badge/Listen_to-Instrumental-orange?style=for-the-badge&logo=itunes)](./output/input_music_instrumental.wav)
 
 ## Project Structure
 
