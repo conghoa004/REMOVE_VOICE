@@ -16,7 +16,7 @@ The separation is powered by the [bs-roformer-infer](https://github.com/lucidrai
 
 - **Python 3.8+**
 - **FFmpeg**: Required for audio decoding/encoding and converting files to standard 44.1kHz WAV.
-- **GPU (Optional but Recommended)**: Significantly speeds up the inference process.
+- **GPU (Optional but Recommended)**: Significantly speeds up the inference process. If you are running this on Kaggle, it is highly recommended to enable the **GPU T4** accelerator.
 
 ## Supported Models
 
