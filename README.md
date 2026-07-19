@@ -81,32 +81,33 @@ You can run the steps interactively using [remove-voice.ipynb](remove-voice.ipyn
    bs-roformer-download --model roformer-model-bs-roformer-vocals-resurrection-by-unwa --output-dir models
    ```
 
-2. **Download custom audio file from Google Drive (Optional):**
-   You can download a custom audio file from Google Drive using `gdown`:
+2. **Download custom audio file from Google Drive:**
+   Use the Python script in the notebook to download your audio file using `gdown`, saving it to `input/input_music.mp3`:
    ```python
-   import gdown
-   gdown.download("https://drive.google.com/uc?id=<file-id>", quiet=False)
+   import gdown, os
+   # Downloads the file to input/input_music.mp3
+   gdown.download(url, "input/input_music.mp3", quiet=False)
    ```
 
-3. **Prepare your input audio:**
-   Convert your target song (e.g. `.mp3`) to a stereo `.wav` file at a 44100Hz sample rate:
+3. **Convert input audio to WAV format:**
+   Convert the downloaded `input_music.mp3` to a stereo `.wav` file at a 44100Hz sample rate:
    ```bash
-   ffmpeg -i "path/to/your/song.mp3" -ar 44100 -ac 2 "input/song.wav"
+   ffmpeg -i "input/input_music.mp3" -ar 44100 -ac 2 "input/input_music.wav"
    ```
 
-4. **Run inference:**
+4. **Run source separation inference:**
    Perform vocal separation:
    ```bash
    bs-roformer-infer \
-     --config_path models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/config_bs_roformer_vocals_resurrection_unwa.yaml \
-     --model_path models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/bs_roformer_vocals_resurrection_unwa.ckpt \
-     --input_folder input \
-     --store_dir output
+     --config_path /kaggle/working/models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/config_bs_roformer_vocals_resurrection_unwa.yaml \
+     --model_path /kaggle/working/models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/bs_roformer_vocals_resurrection_unwa.ckpt \
+     --input_folder "/kaggle/working/input" \
+     --store_dir "/kaggle/working/output"
    ```
 
 Outputs will be saved in the `output/` directory, containing:
-- `song_vocals.wav` (Isolated voice)
-- `song_instrumental.wav` (Instrumental backing track)
+- `input_music_vocals.wav` (Isolated voice)
+- `input_music_instrumental.wav` (Instrumental backing track)
 
 ## Project Structure
 
