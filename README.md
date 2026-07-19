@@ -81,13 +81,20 @@ You can run the steps interactively using [remove-voice.ipynb](remove-voice.ipyn
    bs-roformer-download --model roformer-model-bs-roformer-vocals-resurrection-by-unwa --output-dir models
    ```
 
-2. **Prepare your input audio:**
+2. **Download custom audio file from Google Drive (Optional):**
+   You can download a custom audio file from Google Drive using `gdown`:
+   ```python
+   import gdown
+   gdown.download("https://drive.google.com/uc?id=<file-id>", quiet=False)
+   ```
+
+3. **Prepare your input audio:**
    Convert your target song (e.g. `.mp3`) to a stereo `.wav` file at a 44100Hz sample rate:
    ```bash
    ffmpeg -i "path/to/your/song.mp3" -ar 44100 -ac 2 "input/song.wav"
    ```
 
-3. **Run inference:**
+4. **Run inference:**
    Perform vocal separation:
    ```bash
    bs-roformer-infer \
