@@ -74,38 +74,50 @@ pip install bs-roformer-infer
 
 ## Step-by-Step Usage (from the Notebook)
 
-You can run the steps interactively using [remove-voice.ipynb](remove-voice.ipynb):
+You can run the steps interactively using [remove-voice.ipynb](remove-voice.ipynb).
 
-1. **Download the pre-trained BS-Roformer model:**
+Before running the notebook, place or upload your source audio file at `input/input_music.mp3`. The notebook no longer downloads audio from Google Drive, and the conversion step expects this exact path.
+
+Run the notebook cells in order:
+
+1. **Install the BS-Roformer inference library:**
+   ```bash
+   pip install -q bs-roformer-infer
+   ```
+
+2. **List available pre-trained models:**
+   ```bash
+   bs-roformer-download --list-models
+   ```
+
+3. **Download the Vocals Resurrection model:**
    ```bash
    bs-roformer-download --model roformer-model-bs-roformer-vocals-resurrection-by-unwa --output-dir models
    ```
 
-2. **Download custom audio file from Google Drive:**
-   Use the Python script in the notebook to download your audio file using `gdown`, saving it to `input/input_music.mp3`:
-   ```python
-   import gdown, os
-   # Downloads the file to input/input_music.mp3
-   gdown.download(url, "input/input_music.mp3", quiet=False)
+4. **Install FFmpeg:**
+   ```bash
+   apt-get -qq install ffmpeg
    ```
 
-3. **Convert input audio to WAV format:**
-   Convert the downloaded `input_music.mp3` to a stereo `.wav` file at a 44100Hz sample rate:
+5. **Convert the input audio to WAV:**
+   Convert `input/input_music.mp3` to stereo WAV at a 44100Hz sample rate:
    ```bash
-   ffmpeg -i "input/input_music.mp3" -ar 44100 -ac 2 "input/input_music.wav"
+   ffmpeg -i input/input_music.mp3 -ar 44100 -ac 2 input/input_music.wav
    ```
 
-4. **Run source separation inference:**
-   Perform vocal separation:
+6. **Run source separation inference:**
    ```bash
-   bs-roformer-infer \
-     --config_path /kaggle/working/models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/config_bs_roformer_vocals_resurrection_unwa.yaml \
-     --model_path /kaggle/working/models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/bs_roformer_vocals_resurrection_unwa.ckpt \
-     --input_folder "/kaggle/working/input" \
-     --store_dir "/kaggle/working/output"
+   bs-roformer-infer --config_path /kaggle/working/models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/config_bs_roformer_vocals_resurrection_unwa.yaml --model_path /kaggle/working/models/roformer-model-bs-roformer-vocals-resurrection-by-unwa/bs_roformer_vocals_resurrection_unwa.ckpt --input_folder /kaggle/working/input --store_dir /kaggle/working/output
    ```
 
 Outputs will be saved in the `output/` directory.
+
+## Multi-Instrument Separation
+
+Use [separate-instruments.ipynb](separate-instruments.ipynb) to separate a track into multiple stems. It uses the recommended BS-RoFormer-SW 6-stem model by default (vocals, drums, bass, guitar, piano, and other). For more source categories, the notebook also documents the optional Mega 53-stem model, which needs about 16 GB of VRAM and may produce weaker individual stems.
+
+By default, place `input_music.mp3` or `input_music.wav` in `input/`; WAV files are used directly, while other formats are converted to 44.1 kHz stereo. The notebook saves separated WAV files under `output/instruments/`.
 
 ### Directory Structure & Execution Results
 
@@ -114,14 +126,14 @@ After running the pipeline, your workspace folders will contain the following fi
 ```
 REMOVE_VOICE/
 ├── input/
-│   ├── input_music.mp3                 # Raw downloaded audio (~4.6 MB)
+│   ├── input_music.mp3                 # Source audio provided before running the notebook
 │   └── input_music.wav                 # Preprocessed WAV audio (~36.6 MB)
 └── output/
     ├── input_music_instrumental.wav    # Isolated backing track (~75.0 MB)
     └── input_music_vocals.wav          # Isolated vocal stem (~75.0 MB)
 ```
 
-- **`input_music.mp3`**: The raw downloaded audio file (original mix).
+- **`input_music.mp3`**: The source audio file (original mix), provided before running the notebook.
 
   [![Listen to Original Mix](https://img.shields.io/badge/Listen_to-Original_Mix-green?style=for-the-badge&logo=googleplaymusic)](./input/input_music.mp3)
 
@@ -136,6 +148,7 @@ REMOVE_VOICE/
 ## Project Structure
 
 - [remove-voice.ipynb](remove-voice.ipynb): Jupyter Notebook containing step-by-step pipeline.
+- [separate-instruments.ipynb](separate-instruments.ipynb): Notebook for multi-instrument stem separation.
 - [README.md](README.md): Project documentation and guidelines.
 
 ## License
